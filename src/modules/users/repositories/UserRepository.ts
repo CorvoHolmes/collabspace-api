@@ -1,6 +1,6 @@
 import { prisma } from "@/libs/prismaClient";
-import { ICreateUser, IUser } from "../dto/users";
-import { IUserRepositories } from "../iRepositories/IUserRepositories";
+import { ICreateUser, IUser } from "@modules/users/dto/users";
+import { IUserRepositories } from "@modules/users/iRepositories/IUserRepositories";
 
 class UserRepository implements IUserRepositories {
   create({
@@ -22,6 +22,12 @@ class UserRepository implements IUserRepositories {
         password,
         avatar_url: avatarUrl,
       },
+    });
+  }
+
+  listByEmail(email: string): Promise<IUser | null> {
+    return prisma.users.findFirst({
+      where: { email: { equals: email } },
     });
   }
 }
