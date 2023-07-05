@@ -15,7 +15,7 @@ class CreateUserUseCase {
     private usersRepository: IUserRepositories,
     @inject("UuidProvider")
     private uuidProvider: IUuidProvider,
-    @inject("BCryptProvider")
+    @inject("BcryptProvider")
     private bcryptProvider: BcryptProvider
   ) {}
 
