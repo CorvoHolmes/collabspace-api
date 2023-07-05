@@ -47,6 +47,13 @@ class UserRepository implements IUserRepositories {
       },
     });
   }
+
+  async inactivate(id: string, status: boolean): Promise<void> {
+    await prisma.users.update({
+      where: { id },
+      data: { active: status },
+    });
+  }
 }
 
 export { UserRepository };
