@@ -1,7 +1,7 @@
 import { AppError } from "@helpers/errorsHandler";
 import { sign } from "jsonwebtoken";
 import { AppResponse } from "@helpers/responseParser";
-import { IRequestCreateUserSession } from "@modules/sessions/dto/sessions";
+import { IRequestCreateUserSession } from "@modules/sessions/dtos/sessions";
 import { IUserRepositories } from "@modules/users/iRepositories/IUserRepositories";
 import { IBcryptProvider } from "@shared/container/providers/bcryptProvider/IBcryptProvider";
 import { inject, injectable } from "tsyringe";
