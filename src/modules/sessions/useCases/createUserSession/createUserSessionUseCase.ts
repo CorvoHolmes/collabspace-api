@@ -32,7 +32,7 @@ class CreateUserSessionUseCase {
       listUserByEmail.password
     );
 
-    if (listUserByEmail.active) {
+    if (!listUserByEmail.active) {
       throw new AppError({
         message: "Usuário inativo!",
       });
