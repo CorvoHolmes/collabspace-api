@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
-import { ICommentsRepositories } from "../iRepositories/ICommentsRepositories";
+import { ICommentsRepositories } from "../../iRepositories/ICommentsRepositories";
 import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { IRequestCreateComment } from "../dtos/comments";
+import { IRequestCreateComment } from "../../dtos/comments";
 import { AppResponse } from "@helpers/responseParser";
 import { AppError } from "@helpers/errorsHandler";
 

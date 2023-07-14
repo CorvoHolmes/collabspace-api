@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IRequestCreateComment } from "../dtos/comments";
+import { IRequestCreateComment } from "../../dtos/comments";
 import { container } from "tsyringe";
 import { CreateCommentUseCase } from "./createCommentUseCase";
 
