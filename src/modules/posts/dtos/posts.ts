@@ -46,6 +46,16 @@ interface IListAllPosts {
     name: string;
     avatar_url: string | null;
   };
+  comments: {
+    id: string;
+    content: string;
+    commented_at: Date;
+    users: {
+      id: string;
+      name: string;
+      avatar_url: string | null;
+    };
+  }[];
 }
 
 export {
