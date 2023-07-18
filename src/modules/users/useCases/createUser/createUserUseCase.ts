@@ -1,30 +1,30 @@
 import { inject, injectable } from "tsyringe";
 
 import { IRequestCreateUser } from "@modules/users/dtos/users";
-import { TelephoneFormat } from "@utils/formatData";
+import { telephoneFormat } from "@utils/formatData";
 import { AppResponse } from "@helpers/responseParser";
 import { AppError } from "@helpers/errorsHandler";
-import { IUserRepositories } from "@modules/users/iRepositories/IUserRepositories";
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { BcryptProvider } from "@shared/container/providers/bcryptProvider/implementation/BcryptProvider";
+import { IBcryptProvider } from "@shared/container/providers/bcryptProvider/IBcryptProvider";
 
 @injectable()
 class CreateUserUseCase {
   constructor(
     @inject("UserRepository")
-    private usersRepository: IUserRepositories,
+    private userRepository: IUsersRepositories,
     @inject("UuidProvider")
     private uuidProvider: IUuidProvider,
     @inject("BcryptProvider")
-    private bcryptProvider: BcryptProvider
+    private bcryptProvider: IBcryptProvider
   ) {}
 
   async execute({
     name,
     email,
     confirmEmail,
-    confirmPassword,
     password,
+    confirmPassword,
     telephone,
     birthDate,
   }: IRequestCreateUser): Promise<AppResponse> {
@@ -40,31 +40,31 @@ class CreateUserUseCase {
       )
     ) {
       throw new AppError({
-        message: "Senha fraca",
+        message: "Senha fraca!",
       });
     }
 
     if (email !== confirmEmail) {
       throw new AppError({
-        message: "Os e-mails não coincidem",
+        message: "Os e-mails não coincidem!",
       });
     }
 
-    const listUserByEmail = await this.usersRepository.listByEmail(email);
+    const listUserByEmail = await this.userRepository.listByEmail(email);
 
     if (listUserByEmail) {
       throw new AppError({
-        message: "Usuário já cadastrado",
+        message: "Usuário já cadastrado!",
       });
     }
 
     const passwordHash = await this.bcryptProvider.encryptPassword(password);
 
-    const createUser = await this.usersRepository.create({
+    const createUser = await this.userRepository.create({
       id: this.uuidProvider.createUUID(),
       name,
       email,
-      telephone: TelephoneFormat(telephone),
+      telephone: telephoneFormat(telephone),
       birthDate,
       password: passwordHash.hash,
     });

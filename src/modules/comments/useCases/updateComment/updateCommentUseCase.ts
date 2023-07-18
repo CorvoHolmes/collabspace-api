@@ -1,9 +1,9 @@
-import { AppError } from "@helpers/errorsHandler";
-import { AppResponse } from "@helpers/responseParser";
-import { IRequestUpdateComment } from "@modules/comments/dtos/comments";
+import { inject, injectable } from "tsyringe";
 import { ICommentsRepositories } from "@modules/comments/iRepositories/ICommentsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { inject, injectable } from "tsyringe";
+import { IRequestUpdateComment } from "@modules/comments/dtos/comments";
+import { AppResponse } from "@helpers/responseParser";
+import { AppError } from "@helpers/errorsHandler";
 
 interface IRequest extends IRequestUpdateComment {
   id: string;

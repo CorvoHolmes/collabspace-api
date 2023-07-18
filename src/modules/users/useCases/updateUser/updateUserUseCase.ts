@@ -2,10 +2,10 @@ import { inject, injectable } from "tsyringe";
 
 import { AppResponse } from "@helpers/responseParser";
 import { IRequestUpdateUser } from "@modules/users/dtos/users";
-import { IUserRepositories } from "@modules/users/iRepositories/IUserRepositories";
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { AppError } from "@helpers/errorsHandler";
-import { TelephoneFormat } from "@utils/formatData";
+import { telephoneFormat } from "@utils/formatData";
 
 interface IRequest extends IRequestUpdateUser {
   id: string;
@@ -15,7 +15,7 @@ interface IRequest extends IRequestUpdateUser {
 class UpdateUserUseCase {
   constructor(
     @inject("UserRepository")
-    private userRepository: IUserRepositories,
+    private userRepository: IUsersRepositories,
     @inject("UuidProvider")
     private uuidProvider: IUuidProvider
   ) {}
@@ -36,14 +36,14 @@ class UpdateUserUseCase {
 
     if (!listUserById) {
       throw new AppError({
-        message: "Usuário não encontrado",
+        message: "Usuário não encontrado!",
       });
     }
 
     await this.userRepository.update({
       id,
       name,
-      telephone: TelephoneFormat(telephone),
+      telephone: telephoneFormat(telephone),
       birthDate,
     });
 

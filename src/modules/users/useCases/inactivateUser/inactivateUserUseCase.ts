@@ -1,17 +1,19 @@
-import { AppError } from "@helpers/errorsHandler";
-import { AppResponse } from "@helpers/responseParser";
-import { IUserRepositories } from "@modules/users/iRepositories/IUserRepositories";
-import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { inject, injectable } from "tsyringe";
+
+import { AppResponse } from "@helpers/responseParser";
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
+import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
+import { AppError } from "@helpers/errorsHandler";
 
 interface IRequest {
   id: string;
 }
+
 @injectable()
 class InactivateUserUseCase {
   constructor(
     @inject("UserRepository")
-    private userRepository: IUserRepositories,
+    private userRepository: IUsersRepositories,
     @inject("UuidProvider")
     private uuidProvider: IUuidProvider
   ) {}
@@ -19,7 +21,7 @@ class InactivateUserUseCase {
   async execute({ id }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "ID é inválido",
+        message: "ID é inválido!",
       });
     }
 

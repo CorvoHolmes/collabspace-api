@@ -1,16 +1,16 @@
-import { AppError } from "@helpers/errorsHandler";
+import { inject, injectable } from "tsyringe";
 import { sign } from "jsonwebtoken";
 import { AppResponse } from "@helpers/responseParser";
 import { IRequestCreateUserSession } from "@modules/sessions/dtos/sessions";
-import { IUserRepositories } from "@modules/users/iRepositories/IUserRepositories";
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
+import { AppError } from "@helpers/errorsHandler";
 import { IBcryptProvider } from "@shared/container/providers/bcryptProvider/IBcryptProvider";
-import { inject, injectable } from "tsyringe";
 
 @injectable()
 class CreateUserSessionUseCase {
   constructor(
     @inject("UserRepository")
-    private userRepository: IUserRepositories,
+    private userRepository: IUsersRepositories,
     @inject("BcryptProvider")
     private bcryptProvider: IBcryptProvider
   ) {}
@@ -27,16 +27,16 @@ class CreateUserSessionUseCase {
       });
     }
 
-    const passwordMatch = await this.bcryptProvider.checkPassword(
-      password,
-      listUserByEmail.password
-    );
-
     if (!listUserByEmail.active) {
       throw new AppError({
         message: "Usuário inativo!",
       });
     }
+
+    const passwordMatch = await this.bcryptProvider.checkPassword(
+      password,
+      listUserByEmail.password
+    );
 
     if (!passwordMatch) {
       throw new AppError({

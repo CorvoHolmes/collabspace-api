@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { ListAllPostsUseCase } from "./listAllPostsUseCases";
+import { ListAllPostsUseCase } from "./listAllPostsUseCase";
 
 class ListAllPostsController {
   async handle(request: Request, response: Response) {
@@ -8,7 +8,7 @@ class ListAllPostsController {
 
     const listAllPostsUseCase = container.resolve(ListAllPostsUseCase);
 
-    const result = await listAllPostsUseCase.execute({ page, limit });
+    const result = await listAllPostsUseCase.excute({ page, limit });
 
     return response.status(result.statusCode).json(result);
   }
