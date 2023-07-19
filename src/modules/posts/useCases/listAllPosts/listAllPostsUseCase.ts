@@ -24,7 +24,7 @@ class ListAllPostsUseCase {
 
     const posts = listAll.map((post) => {
       const comments = post.comments.map((comment) => {
-        const reactions = post.reactions.map((reaction) => {
+        const reactions = comment.reactions.map((reaction) => {
           const { users } = reaction;
 
           return {

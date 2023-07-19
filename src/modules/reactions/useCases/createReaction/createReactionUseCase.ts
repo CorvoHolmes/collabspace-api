@@ -74,6 +74,21 @@ class CreateReactionUseCase {
       }
     }
 
+    const countReactionUserPost =
+      await this.reactionRepository.countReactionUserPost(usrId, postId);
+
+    const countReactionUserComment =
+      await this.reactionRepository.countReactionUserComment(usrId, commentId);
+
+    if (
+      (postId && countReactionUserPost) ||
+      (commentId && countReactionUserComment)
+    ) {
+      throw new AppError({
+        message: "Você já reagiu a isto!",
+      });
+    }
+
     const createReaction = await this.reactionRepository.create({
       id: this.uuidProvider.createUUID(),
       userId: usrId,
