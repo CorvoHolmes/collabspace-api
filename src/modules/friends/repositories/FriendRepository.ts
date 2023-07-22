@@ -22,6 +22,12 @@ class FriendRepository implements IFriendsRepositories {
     });
   }
 
+  listById(id: string): Promise<IFriend | null> {
+    return prisma.friends.findFirst({
+      where: { id },
+    });
+  }
+
   async updateActionStatus({
     id,
     actionId1,
