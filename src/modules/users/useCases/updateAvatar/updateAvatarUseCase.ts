@@ -1,9 +1,8 @@
-import { AppError } from "@helpers/errorsHandler";
-import { AppResponse } from "@helpers/responseParser";
-import { IRequestUpdateUserAvatar } from "@modules/users/dtos/users";
-import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
-import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { inject, injectable } from "tsyringe";
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
+import { IRequestUpdateUserAvatar } from "@modules/users/dtos/users";
+import { AppResponse } from "@helpers/responseParser";
+import { AppError } from "@helpers/errorsHandler";
 
 interface IRequest extends IRequestUpdateUserAvatar {
   usrId: string;
@@ -13,9 +12,7 @@ interface IRequest extends IRequestUpdateUserAvatar {
 class UpdateAvatarUseCase {
   constructor(
     @inject("UserRepository")
-    private userRepository: IUsersRepositories,
-    @inject("UuidProvider")
-    private uuidProvider: IUuidProvider
+    private userRepository: IUsersRepositories
   ) {}
 
   async execute({ usrId, avatarUrl }: IRequest): Promise<AppResponse> {
