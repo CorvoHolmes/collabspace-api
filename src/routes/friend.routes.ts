@@ -7,11 +7,16 @@ import { RecuseRequestController } from "@modules/friends/useCases/recuseRequest
 import { Router } from "express";
 
 import { authentication } from "src/middlewares/authentication";
+import { ListAllFriendsByUserController } from "@modules/friends/useCases/listAllFriendByUser/listAllFriendsByUserController";
 
 const friendRoutes = Router();
 
 friendRoutes.use(authentication);
 
+friendRoutes.get(
+  "/listAllFriends",
+  new ListAllFriendsByUserController().handle
+);
 friendRoutes.post("/:targetId", new CreateFriendController().handle);
 friendRoutes.patch("/acceptRequest/:id", new AcceptRequestController().handle);
 friendRoutes.patch("/cancelRequest/:id", new CancelRequestController().handle);
