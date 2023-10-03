@@ -19,7 +19,7 @@ friendRoutes.get(
 );
 
 friendRoutes.get(
-  "/listAllRequests",
+  "/listAllRequests/:id",
   new ListAllFriendsByUserController().handle
 );
 
