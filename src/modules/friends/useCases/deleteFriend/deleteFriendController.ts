@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { DeleteFriendUseCase } from "./deleteFriendUseCase";
 import { container } from "tsyringe";
+import { DeleteFriendUseCase } from "./deleteFriendUseCase";
 
 class DeleteFriendController {
   async handle(request: Request, response: Response) {

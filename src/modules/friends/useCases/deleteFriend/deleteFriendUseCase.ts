@@ -1,9 +1,9 @@
+import { inject, injectable } from "tsyringe";
 import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { EnumFriendActions } from "src/enums/friendActions";
-import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   usrId: string;
@@ -39,6 +39,7 @@ class DeleteFriendUseCase {
       usrId !== listFriendById.user_id_2
     ) {
       throw new AppError({
+        statusCode: 401,
         message: "Operação não permitida!",
       });
     }
@@ -48,9 +49,10 @@ class DeleteFriendUseCase {
       listFriendById.action_id_2 !== EnumFriendActions.accepted
     ) {
       throw new AppError({
-        message: "Amizade não aceita, cancelada ou recusada",
+        message: "Amizade não aceita, cancelada ou recusada!",
       });
     }
+
     await this.friendRepository.delete(id);
 
     return new AppResponse({

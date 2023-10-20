@@ -43,7 +43,7 @@ interface IUpdateUser {
   name?: string;
   telephone?: string | null;
   birthDate?: string;
-  bio: string;
+  bio?: string | null;
 }
 
 interface IRequestUpdateUserAvatar {
@@ -72,6 +72,6 @@ export {
   IUpdateUser,
   IUpdateUserAvatar,
   IRequestUpdateUserAvatar,
-  IRequestUpdateUserCover,
   IUpdateUserCover,
+  IRequestUpdateUserCover,
 };

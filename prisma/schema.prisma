@@ -32,10 +32,10 @@ model friends {
 model posts {
   id           String      @id @db.Uuid
   user_id      String      @db.Uuid
+  content      String      @db.VarChar
   tags         String?     @db.VarChar
   visibility   Int         @default(0) @db.SmallInt
   published_at DateTime    @default(now()) @db.Timestamp(6)
-  content      String      @db.VarChar
   comments     comments[]
   users        users       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   reactions    reactions[]

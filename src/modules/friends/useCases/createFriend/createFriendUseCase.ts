@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { IFriendsRepositories } from "../../iRepositories/IFriendsRepositories";
+import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { AppResponse } from "@helpers/responseParser";
 import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
@@ -25,7 +25,7 @@ class CreateFriendUseCase {
   async execute({ usrId, targetId }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(targetId)) {
       throw new AppError({
-        message: "ID é inválido!",
+        message: "ID inválido!",
       });
     }
 
@@ -70,6 +70,14 @@ class CreateFriendUseCase {
 
         return new AppResponse({
           message: "Solicitação enviada com sucesso!",
+          data: {
+            id: listFriendshipAlreadyExists.id,
+            userId1: listFriendshipAlreadyExists.user_id_1,
+            userId2: listFriendshipAlreadyExists.user_id_2,
+            actionId1: listFriendshipAlreadyExists.action_id_1,
+            actionId2: listFriendshipAlreadyExists.action_id_2,
+            createdAt: listFriendshipAlreadyExists.created_at,
+          },
         });
       }
 
@@ -77,7 +85,7 @@ class CreateFriendUseCase {
         listFriendshipAlreadyExists.action_id_2 === EnumFriendActions.accepted
       ) {
         throw new AppError({
-          message: "A Solicitação já foi aceita!",
+          message: "A solicitação já foi aceita!",
         });
       }
     }

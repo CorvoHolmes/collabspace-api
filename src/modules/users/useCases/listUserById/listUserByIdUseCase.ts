@@ -1,5 +1,5 @@
-import { AppError } from "@helpers/errorsHandler";
 import { inject, injectable } from "tsyringe";
+import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
@@ -39,7 +39,7 @@ class ListUserByIdUseCase {
     };
 
     return new AppResponse({
-      message: "",
+      message: "Usuário listado com sucesso!",
       data: {
         user,
       },

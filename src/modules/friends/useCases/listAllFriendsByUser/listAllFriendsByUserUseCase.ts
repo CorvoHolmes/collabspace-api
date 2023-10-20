@@ -1,8 +1,8 @@
-import { AppError } from "@helpers/errorsHandler";
+import { inject, injectable } from "tsyringe";
 import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { inject, injectable } from "tsyringe";
+import { AppError } from "@helpers/errorsHandler";
 
 interface IRequest {
   id: string;
@@ -27,7 +27,7 @@ class ListAllFriendsByUserUseCase {
     const listAllFriendsByUser =
       await this.friendRepository.listAllFriendsByUser(id);
 
-    const friends = await listAllFriendsByUser.map((friend) => {
+    const friends = listAllFriendsByUser.map((friend) => {
       return {
         id: friend.id,
         user1: {
@@ -47,10 +47,7 @@ class ListAllFriendsByUserUseCase {
     return new AppResponse({
       message: "Amizades listadas com sucesso!",
       data: {
-        listAllFriendsByUser,
-        data: {
-          friends,
-        },
+        friends,
       },
     });
   }

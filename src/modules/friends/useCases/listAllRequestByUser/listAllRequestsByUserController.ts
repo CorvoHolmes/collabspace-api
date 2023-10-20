@@ -10,9 +10,7 @@ class ListAllRequestsByUserController {
       ListAllRequestsByUserUseCase
     );
 
-    const result = await listAllRequestsByUserUseCase.execute({
-      id,
-    });
+    const result = await listAllRequestsByUserUseCase.execute({ id });
 
     return response.status(result.statusCode).json(result);
   }

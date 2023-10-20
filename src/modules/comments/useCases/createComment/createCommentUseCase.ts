@@ -25,7 +25,7 @@ class CreateCommentUseCase {
   async execute({ postId, usrId, content }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(postId)) {
       throw new AppError({
-        message: "ID é inválido!",
+        message: "ID inválido!",
       });
     }
 
@@ -59,7 +59,7 @@ class CreateCommentUseCase {
           email: createComment.users?.email,
           avatarUrl: createComment.users?.avatar_url,
         },
-        reaction: [],
+        reactions: [],
       },
     });
   }

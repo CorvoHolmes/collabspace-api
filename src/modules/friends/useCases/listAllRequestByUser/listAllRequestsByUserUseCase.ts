@@ -1,8 +1,8 @@
-import { AppError } from "@helpers/errorsHandler";
+import { inject, injectable } from "tsyringe";
 import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { inject, injectable } from "tsyringe";
+import { AppError } from "@helpers/errorsHandler";
 
 interface IRequest {
   id: string;
@@ -20,14 +20,14 @@ class ListAllRequestsByUserUseCase {
   async execute({ id }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "ID inválido",
+        message: "ID inválido!",
       });
     }
 
     const listAllRequestsByUser =
       await this.friendRepository.listAllRequestsByUser(id);
 
-    const requests = await listAllRequestsByUser.map((friend) => {
+    const requests = listAllRequestsByUser.map((friend) => {
       return {
         id: friend.id,
         user1: {
@@ -40,7 +40,7 @@ class ListAllRequestsByUserUseCase {
     });
 
     return new AppResponse({
-      message: "Amizades listadas com sucesso!",
+      message: "Solicitações listadas com sucesso!",
       data: {
         requests,
       },

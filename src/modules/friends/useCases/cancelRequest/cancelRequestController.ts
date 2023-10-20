@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { CancelRequestUseCase } from "./cancelRequestUseCase";
 import { container } from "tsyringe";
+import { CancelRequestUseCase } from "./cancelRequestUseCase";
 
 class CancelRequestController {
   async handle(request: Request, response: Response) {
