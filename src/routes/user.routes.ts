@@ -19,6 +19,7 @@ userRoutes.get("/:id", new ListUserByIdController().handle);
 userRoutes.put("/", new UpdateUserController().handle);
 userRoutes.patch("/updateAvatar", new UpdateAvatarController().handle);
 userRoutes.patch("/updateCover", new UpdateCoverController().handle);
+// userRoutes.patch("/updateProfile", new )
 userRoutes.delete("/", new InactivateUserController().handle);
 
 export { userRoutes };
