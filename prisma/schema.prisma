@@ -63,8 +63,8 @@ model users {
   avatar_url                       String?     @db.VarChar
   created_at                       DateTime    @default(now()) @db.Timestamp(6)
   active                           Boolean     @default(true)
-  bio                              String?     @db.VarChar
   cover_url                        String?     @db.VarChar
+  bio                              String?     @db.VarChar
   address                          address[]
   comments                         comments[]
   friends_friends_user_id_1Tousers friends[]   @relation("friends_user_id_1Tousers")

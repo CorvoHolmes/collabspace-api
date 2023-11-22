@@ -8,4 +8,45 @@ interface IAddress {
   street: string | null;
 }
 
-export { IAddress };
+interface ICreateAddress {
+  id: string;
+  userId: string;
+  cep?: string;
+  country?: string;
+  province?: string;
+  city?: string;
+  street?: string;
+}
+
+interface IRequestCreateAddress {
+  cep?: string;
+  country?: string;
+  province?: string;
+  city?: string;
+  street?: string;
+}
+
+interface IUpdateAddress {
+  id: string;
+  cep?: string;
+  country?: string;
+  province?: string;
+  city?: string;
+  street?: string;
+}
+
+interface IRequestUpdateAddress {
+  cep?: string;
+  country?: string;
+  province?: string;
+  city?: string;
+  street?: string;
+}
+
+export {
+  IAddress,
+  ICreateAddress,
+  IRequestCreateAddress,
+  IUpdateAddress,
+  IRequestUpdateAddress,
+};
