@@ -6,7 +6,7 @@ import { UserRepository } from "@modules/users/repositories/UserRepository";
 import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRepositories";
 import { PostRepository } from "@modules/posts/repositories/PostRepository";
 import { ICommentsRepositories } from "@modules/comments/iRepositories/ICommentsRepositories";
-import { CommentRepository } from "@modules/comments/repositories/CommentRepository";
+import { CommentRepository } from "@modules/comments/Repositories/CommentRepository";
 import { IReactionsRepositories } from "@modules/reactions/iRepositories/IReactionsRepositories";
 import { ReactionRepository } from "@modules/reactions/repositories/ReactionRepository";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
